@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Registrar Libro</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/style.css"/>
+    </head>
+    <body>
+
+        <nav th:replace="/plantillas/layout::navbar"></nav>
+        <div class="d-flex">
+            <div class="autor-fondo" style="min-height: 82vh"></div>
+            <div class="contenedor autor-form" >
+
+            <h2 class="text-center">Registrar Libro</h2>
+
+            <div class="col-12 text-center my-4">
+                <span class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${error != null}">
+                    <strong>[[${error}]]</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </span>
+                <span  class="alert alert-success alert-dismissible fade show" role="alert" th:if="${exito != null}">
+                    <strong>[[${exito}]]</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </span>
+            </div>
+
+            <form action="/libro/registro" method="post" class="container col-lg-8 " th:object="${libro}">
+
+                <input type="hidden" th:field="*{id}" name="id">
+
+                <label for="isbn">Isbn</label>
+                <input type="number" class="form-control" id="isbn" name="isbn" placeholder="Isbn" th:field="*{isbn}">
+
+
+
+                <label for="titulo">Titulo</label>
+                <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Titulo" th:field="*{titulo}">
+
+                <label for="ejemplares">Ejemplares</label>
+                <input type="number" class="form-control" id="ejemplares" name="ejemplares" placeholder="Ejemplares" th:field="*{ejemplares}">
+
+
+                <label for="autor">Autor</label>
+                <select class="form-select"  name="autor" th:field="*{autor}">  
+                    <div th:each="autor : ${autores}" id="autor">
+                        <option th:value="${autor.id}" th:text="${autor.nombre}"/>
+                    </div>
+                </select>
+
+                <label for="editorial">Editorial</label>
+                <select class="form-select"  id="editorial" name="editorial" th:field="*{editorial}">
+                    <div th:each="editorial : ${editoriales}">            
+                        <option th:value="${editorial.id}" th:text="${editorial.nombre}"></option>
+                    </div>
+                </select>
+
+                <input type="submit" value="Guardar" class="form-control btn btn-warning mt-2">
+            </form>
+            <div class="d-flex justify-content-center flex-column text-center mt-4">
+                <p>¿No se encuentra tu autor? Registra haciendo click <a class="text-info" th:href="@{/autor/registrar}">aqui</a></p>
+                <p>¿No se encuentra tu editorial? Registra haciendo click <a class="text-info" th:href="@{/editorial/registrar}">aqui</a></p>
+            </div>
+            
+
+        </div>
+            
+        </div>
+        
+        <footer th:replace="/plantillas/layout::footer"></footer>
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+
+    </body>
+</html>

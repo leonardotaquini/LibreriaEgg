@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      <head>
+    <title>Lista de editoriales</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body>
+
+    <nav th:replace="/plantillas/layout::navbar"></nav>
+
+    <div style="min-height: 80vh">
+
+        <div th:if="${editoriales.empty or editoriales == null}" class="alert alert-danger text-center container">
+            No hay editoriales
+        </div>
+
+        <table class="table table-success container" th:if="${editoriales != null and !editoriales.empty}">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre</th>               
+                    <th scope="col">Acciones</th>               
+                </tr>
+            </thead>
+            <tbody th:each="editorial : ${editoriales}">
+                <tr>
+                    <td>[[${editorial.nombre}]]</td>
+                    <td>
+                        <a th:href="@{/editorial/eliminar/} + ${editorial.id}" class="btn btn-danger btn-circle btn-sm ">
+                            ✖️
+                        </a>
+                        <a th:href="@{/editorial/editar/} + ${editorial.id}" class="btn btn-info btn-circle btn-sm ">
+                            ✏️
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <footer th:replace="/plantillas/layout::footer"></footer>
+</body>
+</html>
