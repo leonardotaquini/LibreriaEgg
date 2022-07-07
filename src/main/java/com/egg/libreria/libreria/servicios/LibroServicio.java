@@ -5,6 +5,7 @@ import com.egg.libreria.libreria.excepciones.MiExcepcion;
 import com.egg.libreria.libreria.repositorios.AutorRepositorio;
 import com.egg.libreria.libreria.repositorios.EditorialRepositorio;
 import com.egg.libreria.libreria.repositorios.LibroRepositorio;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,8 @@ public class LibroServicio {
 
     @Autowired
     private EditorialRepositorio editorialRepositorio;
+    
+    
 
     //Metodos
     @Transactional
@@ -36,6 +39,7 @@ public class LibroServicio {
 
     @Transactional(readOnly = true)
     public Libro buscarLibro(Libro libro) {
+        libro.setAlta(new Date());
         return libroRepositorio.findById(libro.getId()).orElse(null);
     }
     

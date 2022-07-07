@@ -20,6 +20,40 @@
         <footer th:fragment="footer" class="footer col-12 py-2 d-flex align-items-center justify-content-center border border-top">
             [[${year}]] - Leonardo Taquini
         </footer>
+        
+        
+        
+                <table class="table table-success container" th:if="${libros != null and !libros.empty}">
+            <thead>
+                <tr>
+                    <th scope="col">Isbn</th>
+                    <th scope="col">Titulo</th>
+                    <th scope="col">Ejemplares</th>
+                    <th scope="col">Alta</th>
+                    <th scope="col">Autor</th>
+                    <th scope="col">Editorial</th>
+                    <th scope="col">Accion</th>
+                </tr>
+            </thead>
+            <tbody th:each="libro : ${libros}">
+                <tr>
+                    <td>[[${libro.isbn}]]</td>
+                    <td>[[${libro.titulo}]]</td>
+                    <td>[[${libro.ejemplares}]]</td>
+                    <td>[[${libro.alta}]]</td>
+                    <td>[[${libro.autor.nombre}]]</td>
+                    <td>[[${libro.editorial.nombre}]]</td>
+                    <td>
+                        <a th:href="@{/libro/eliminar/} + ${libro.id}" class="btn btn-danger btn-circle btn-sm ">
+                            ✖️
+                        </a>
+                        <a th:href="@{/libro/editar/} + ${libro.id}" class="btn btn-info btn-circle btn-sm ">
+                            ✏️
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
 
         <!-- JavaScript Bundle with Popper -->

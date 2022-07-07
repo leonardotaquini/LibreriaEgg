@@ -26,6 +26,8 @@ public class Libro {
     @Temporal(TemporalType.DATE)
     private Date alta;
     
+    private String foto;
+    
     @ManyToOne
     private Autor autor;
     

@@ -16,7 +16,6 @@
     text-shadow: #ffffff 1px  3px 1px;
 
 }
-
 .footer{
     color: black;
 }
@@ -32,6 +31,20 @@
 .autor-form{
     width: 50vw;
 }
+.libro-card{
+    width: 10rem;
+    height: 12rem;
+    
+    
+}
+.login{
+    background-image:linear-gradient(rgba(247, 246, 212, 0.055), rgba(235, 231, 17, 0.082)), url("/images/bg-index.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 100%;
+}
+
 
 @media (max-width:500px) {
     .autor-form{

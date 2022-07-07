@@ -10,13 +10,38 @@
 </head>
 <body>
     <nav th:replace="/plantillas/layout::navbar"></nav>
+
+
+
+    <div th:if="${libros.empty or libros == null}" class="alert alert-danger text-center container">
+        No hay libros
+    </div>
+
     <div style="min-height: 80vh">
 
-
-
-        <div th:if="${libros.empty or libros == null}" class="alert alert-danger text-center container">
-            No hay libros
+        <div class="container mt-2">
+            <form th:action="@{/libro/buscar}" class="d-flex align-items-center w-100 justify-content-around">
+                <div class="form-group mx-sm-3 w-75">
+                    <input type="text" name="palabraClave" class="form-control"
+                           id="palabraClave" th:value="${palabraClave}"
+                           placeholder="Isbn, titulo, autor, editorial..." required>
+                </div>
+                <input type="submit" class="btn btn-warning" value="Buscar">
+            </form>
         </div>
+
+        <div class="d-flex flex-wrap" th:if="${libros != null and !libros.empty}">
+            <div class="row col-12 justify-content-around" >
+                <div class=" libro-card justify-content-between my-3" th:each="libro : ${libros}">
+                    <div class="card-img-top text-center">
+                        <img th:src="@{'/egg-noticias/'+${libro.foto}}" th:alt="${libro.foto}" class="container">
+                        <strong class="text-center">[[${libro.titulo}]]</strong>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
 
         <table class="table table-success container" th:if="${libros != null and !libros.empty}">
             <thead>
@@ -49,7 +74,10 @@
                 </tr>
             </tbody>
         </table>
+
     </div>
+
+
     <footer th:replace="/plantillas/layout::footer"></footer>
 </body>
 </html>
